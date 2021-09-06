@@ -11,14 +11,31 @@ function App() {
   const imgref = useRef(null);
 
   const upload = () => {
-    acceptedFiles.width = imgref.current?.clientWidth;
-    acceptedFiles.height = imgref.current?.clientHeight;
+    acceptedFiles.map((file) => {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        var img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function () {
+          file.width = this.width;
+          file.height = this.height;
+        };
+      };
+      reader.readAsDataURL(file);
+      console.log(file);
+      return file;
+    });
     console.log(acceptedFiles);
-    setuploaded([...uploaded, ...acceptedFiles]);
-    setblob(uploaded);
-    acceptedFiles.splice(0);
-    console.log(imgref?.current);
-    console.log(blob);
+    // acceptedFiles.width = imgref.current?.clientWidth;
+    // acceptedFiles.height = imgref.current?.clientHeight;
+    // console.log(acceptedFiles);
+    // setuploaded([...uploaded, ...acceptedFiles]);
+    // setblob(uploaded);
+    // acceptedFiles.splice(0);
+    // console.log(imgref?.current);
+    // console.log(blob);
   };
   return (
     <div className="App" style={{ width: "70%", margin: "0 auto" }}>
