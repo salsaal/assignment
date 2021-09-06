@@ -4,12 +4,11 @@ import { useState, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 // import "react-dropzone-uploader/dist/styles.css";
 function App() {
-  const [selected, setselected] = useState([]);
+  
   const [uploaded, setuploaded] = useState([]);
-  const [blob, setblob] = useState([]);
+  
   var { acceptedFiles, getRootProps, getInputProps } = useDropzone();
-  const imgref = useRef(null);
-
+  
   const upload = () => {
     acceptedFiles.map((file) => {
       var reader = new FileReader();
@@ -28,14 +27,9 @@ function App() {
       return file;
     });
     console.log(acceptedFiles);
-    // acceptedFiles.width = imgref.current?.clientWidth;
-    // acceptedFiles.height = imgref.current?.clientHeight;
-    // console.log(acceptedFiles);
-    // setuploaded([...uploaded, ...acceptedFiles]);
-    // setblob(uploaded);
-    // acceptedFiles.splice(0);
-    // console.log(imgref?.current);
-    // console.log(blob);
+    
+     setuploaded([...uploaded, ...acceptedFiles]);
+    
   };
   return (
     <div className="App" style={{ width: "70%", margin: "0 auto" }}>
